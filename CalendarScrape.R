@@ -1,4 +1,4 @@
-####------------------------------  Install Packages  ------------------------------####
+##################################  INSTALL PACKAGES  ##################################
 install.packages('pdftables')
 install.packages('pdftools')
 install.packages('tabulizer')
@@ -7,7 +7,8 @@ install.packages('stringr')
 install.packages('rvest')
 install.packages('tidyverse')
 
-####------------------------------  Libraries         ------------------------------####
+##################################  LIBRARIES     ##################################
+
 library(rvest)
 library(tidyverse)
 library(stringr)
@@ -17,7 +18,8 @@ library(tabulizer)
 
 setwd("C:/Users/Vic/Desktop/Queensland Treasury/Code/R/CalendarScrape")
 
-####------------------------------  Source Files      ------------------------------####
+##################################  SOURCE FILES  ##################################
+
 # Melbourne Institute - Latest News URL
 miURL = 'https://melbourneinstitute.unimelb.edu.au/publications/macroeconomic-reports/latest-news/index-of-consumer-sentiment'
 
@@ -25,7 +27,9 @@ miURL = 'https://melbourneinstitute.unimelb.edu.au/publications/macroeconomic-re
 pdfFile = 'Economic_Calendar_March2023_WBC.pdf'
 
 
-####------------------------------  rvest      ------------------------------####
+
+##################################  URL SCRAPING  ##################################
+####------------------------------  rvest         ------------------------------####
 
 westpacDate <- read_html(miURL)
 westpacDate
@@ -34,7 +38,9 @@ date <- westpacDate %>% html_elements("p") %>% html_text()
 finalDate <- sub('.*will be released at ', '', date[str_detect(date, "will be released at")])
 print(finalDate)
 
-####------------------------------  tabulizer      ------------------------------####
+
+##################################  PDF SCRAPING  ##################################
+####------------------------------  tabulizer     ------------------------------####
 
 
 # function to extract table data from PDF
@@ -100,9 +106,6 @@ for (page in start_page:end_page) {
 }
 
 
-
-
-
 ####------------------------------  pdftools v1.0    ------------------------------####
 
 # Load packages
@@ -145,8 +148,6 @@ table_data <- as.data.frame(table_data, stringsAsFactors = FALSE)
 table_data <- table_data[1:5,]
 
 # Use table_data for further analysis
-
-
 
 
 ####------------------------------  convert_pdf      ------------------------------####
